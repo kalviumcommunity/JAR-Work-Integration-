@@ -245,3 +245,59 @@ If you want, I can also:
 * Rewrite it in **simple Indian English tone**
 
 Just tell me 👍
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## TypeScript, ESLint, Prettier & Pre-Commit Hooks Setup
+
+### 1. TypeScript Strict Mode
+We enabled strict TypeScript settings in `tsconfig.json`:
+
+- `strict: true` → catches type errors early
+- `noImplicitAny` → forces explicit typing
+- `noUnusedLocals` & `noUnusedParameters` → warns for unused code
+- `forceConsistentCasingInFileNames` → prevents file import mismatches
+- `skipLibCheck` → skips checking external library types for faster builds
+
+**Benefit:** Reduces runtime bugs and improves code safety.
+
+### 2. ESLint + Prettier Configuration
+- ESLint (`.eslintrc.json`) enforces code quality and style
+  - `no-console: warn` → warns on leftover console logs
+  - `semi: ["error", "always"]` → enforces semicolons
+  - `quotes: ["error", "double"]` → enforces double quotes
+- Prettier (`.prettierrc`) ensures consistent formatting across the team
+
+**Benefit:** Keeps code readable, clean, and consistent.
+
+### 3. Pre-Commit Hooks
+- Husky + lint-staged runs **ESLint + Prettier** automatically before every commit
+- Only staged files are checked (`*.ts, *.tsx, *.js, *.jsx`)
+
+**Benefit:** Prevents buggy or unformatted code from entering the repository.
+
+### 4. Screenshots / Logs
+Include screenshots showing:
+- ESLint fixing errors
+- Prettier formatting code
+- Pre-commit hook blocking commit if errors exist
+
+### 5. Team Reflection
+> “If our team scaled to 10 developers tomorrow, this setup ensures consistent code quality, prevents conflicts, and avoids chaotic commits.”

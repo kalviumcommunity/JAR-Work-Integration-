@@ -301,3 +301,74 @@ Include screenshots showing:
 
 ### 5. Team Reflection
 > “If our team scaled to 10 developers tomorrow, this setup ensures consistent code quality, prevents conflicts, and avoids chaotic commits.”
+
+
+
+
+
+
+
+
+
+
+## Environment Variable Management
+
+This project uses environment variables to manage secrets and configuration safely.
+
+### Environment Files
+- `.env.local`  
+  Used for real credentials such as database URLs and API keys.  
+  This file is ignored by Git and never pushed to GitHub.
+
+- `.env.example`  
+  Acts as a template listing all required environment variables with placeholder values.  
+  This helps other developers set up the project locally.
+
+### Server-side Variables
+These variables are available only on the server and must not be exposed to the client.
+- `DATABASE_URL`
+- `SECRET_KEY`
+
+They are accessed using `process.env` in server-side code.
+
+### Client-side Variables
+Client-safe variables must start with `NEXT_PUBLIC_`.
+- `NEXT_PUBLIC_API_BASE_URL`
+
+These can be safely used in client components.
+
+### Security Practices
+- `.env.local` is added to `.gitignore` to prevent accidental commits.
+- Only `.env.example` is committed to the repository.
+- Secrets are never exposed to the browser.
+
+### Reflection
+If `.env.local` is accidentally pushed to GitHub, sensitive credentials could be leaked.  
+This setup prevents that by ignoring `.env.local` and enforcing the use of `.env.example`.
+
+
+
+
+## Code Review Checklist
+
+Before approving any Pull Request, reviewers must ensure:
+
+- Code follows project naming conventions
+- Feature or fix works correctly when tested locally
+- No console errors or warnings
+- ESLint and Prettier checks pass
+- Code is readable with meaningful comments
+- No sensitive data (API keys, passwords) is exposed
+
+
+## Branching Strategy
+
+We follow a structured branching strategy to maintain clarity and consistency:
+
+- feature/<feature-name> for new features
+- fix/<bug-name> for bug fixes
+- chore/<task-name> for maintenance tasks
+- docs/<update-name> for documentation updates
+
+All changes must be merged into the `main` branch only through Pull Requests.
+

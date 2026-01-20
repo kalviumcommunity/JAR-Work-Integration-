@@ -1,0 +1,70 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  password  String
+  projects  Project[]
+  comments  Comment[]
+  createdAt DateTime  @default(now())
+}
+
+
+model Project {
+  id        Int      @id @default(autoincrement())
+  title     String
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tasks     Task[]
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+
+model Status {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  tasks Task[]
+}
+
+
+
+model Task {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  projectId   Int
+  statusId    Int
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  status      Status   @relation(fields: [statusId], references: [id])
+  comments    Comment[]
+  createdAt   DateTime @default(now())
+
+  @@index([projectId])
+  @@index([statusId])
+}
+
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  taskId    Int
+  userId    Int
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([taskId])
+  @@index([userId])
+}
+
+

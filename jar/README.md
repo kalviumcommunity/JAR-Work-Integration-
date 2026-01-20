@@ -34,3 +34,43 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+
+
+
+
+Database Schema Design
+
+PostgreSQL database designed using Prisma ORM
+
+Normalized schema following 1NF, 2NF, and 3NF
+
+Separate tables for User, Project, Task, Status, and Comment
+
+Relationships
+
+User → Project (One-to-Many)
+
+Project → Task (One-to-Many)
+
+Task → Comment (One-to-Many)
+
+Status → Task (One-to-Many)
+
+Constraints & Optimization
+
+UNIQUE constraint on email and status name
+
+Foreign keys with ON DELETE CASCADE
+
+Indexes added on frequently queried fields
+
+Scalability
+
+Normalized schema avoids redundancy
+
+Indexed foreign keys improve performance
+
+Status table allows easy future expansion

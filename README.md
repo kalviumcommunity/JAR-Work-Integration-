@@ -372,3 +372,56 @@ We follow a structured branching strategy to maintain clarity and consistency:
 
 All changes must be merged into the `main` branch only through Pull Requests.
 
+
+
+
+
+
+
+## Transaction & Query Optimisation
+
+### Transaction Scenario
+A task creation flow was implemented where both the task and its initial comment are created inside a Prisma transaction. This ensures atomicity and prevents partial writes.
+
+### Rollback Verification
+An invalid statusId was intentionally passed to trigger a failure. Prisma rolled back both task and comment creation, ensuring database consistency.
+
+### Indexes Used
+Indexes were added on foreign key columns such as projectId, statusId, taskId, and userId to optimise filtering and relational queries.
+
+### Query Optimisation
+- Avoided over-fetching by using `select`
+- Implemented pagination using `take`
+- Reduced joins and payload size
+
+### Performance Evidence
+Prisma query logs were enabled to compare query execution times before and after optimisation.
+
+### Anti-patterns Avoided
+- N+1 queries
+- Full table scans
+- Over-fetching relations
+
+### Production Monitoring
+In production, query latency and slow queries would be monitored using Prisma logs and database performance tools such as PostgreSQL EXPLAIN and cloud monitoring services.
+
+
+
+
+
+
+
+
+## Global API Response Handler
+
+All API routes use a unified response format for success and error handling.
+
+### Success Response Format
+```json
+{
+  "success": true,
+  "message": "Users fetched successfully",
+  "data": [],
+  "timestamp": "2026-01-22T10:30:00Z"
+}
+

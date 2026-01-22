@@ -1,16 +1,16 @@
 import { NextResponse } from "next/server";
-import { taskSchema } from "@/lib/schemas/taskSchema";
+import { userSchema } from "@/lib/schemas/userSchema";
 import { ZodError } from "zod";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const data = taskSchema.parse(body);
+    const data = userSchema.parse(body);
 
     return NextResponse.json(
       {
         success: true,
-        message: "Task created successfully",
+        message: "User created successfully",
         data,
       },
       { status: 201 }

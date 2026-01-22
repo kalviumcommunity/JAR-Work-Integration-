@@ -425,3 +425,27 @@ All API routes use a unified response format for success and error handling.
   "timestamp": "2026-01-22T10:30:00Z"
 }
 
+ 
+
+
+
+
+
+
+
+
+
+ ## Input Validation with Zod
+
+Zod is used to validate all POST and PUT API requests.
+
+### Example Validation Error Response
+```json
+{
+  "success": false,
+  "message": "Validation Error",
+  "errors": [
+    { "field": "email", "message": "Invalid email address" }
+  ]
+}
+

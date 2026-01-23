@@ -1,38 +1,31 @@
 import { NextResponse } from "next/server";
-import { userSchema } from "@/lib/schemas/userSchema";
-import { ZodError } from "zod";
+import jwt from "jsonwebtoken";
 
-export async function POST(req: Request) {
+const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
+
+export async function GET(req: Request) {
   try {
-    const body = await req.json();
-    const data = userSchema.parse(body);
+    const authHeader = req.headers.get("authorization");
+    const token = authHeader?.split(" ")[1];
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: "User created successfully",
-        data,
-      },
-      { status: 201 }
-    );
-  } catch (error) {
-    if (error instanceof ZodError) {
+    if (!token) {
       return NextResponse.json(
-        {
-          success: false,
-          message: "Validation Error",
-          errors: error.errors.map((e) => ({
-            field: e.path[0],
-            message: e.message,
-          })),
-        },
-        { status: 400 }
+        { success: false, message: "Token missing" },
+        { status: 401 }
       );
     }
 
+    const decoded = jwt.verify(token, JWT_SECRET);
+
+    return NextResponse.json({
+      success: true,
+      message: "Protected data",
+      user: decoded,
+    });
+  } catch {
     return NextResponse.json(
-      { success: false, message: "Internal Error" },
-      { status: 500 }
+      { success: false, message: "Invalid or expired token" },
+      { status: 403 }
     );
   }
 }

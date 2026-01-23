@@ -449,3 +449,31 @@ Zod is used to validate all POST and PUT API requests.
   ]
 }
 
+
+
+
+Update README.md
+
+Add:
+
+Signup flow
+
+Login flow
+
+JWT expiry (1 hour)
+
+Token storage (cookie vs localStorage)
+
+Screenshots (Postman success + failure)Update README.md
+
+Add:
+
+Signup flow
+
+Login flow
+
+JWT expiry (1 hour)
+
+Token storage (cookie vs localStorage)
+
+Screenshots (Postman success + failure)

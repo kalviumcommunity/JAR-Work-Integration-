@@ -245,3 +245,74 @@ If you want, I can also:
 * Rewrite it in **simple Indian English tone**
 
 Just tell me 👍
+
+
+# API Route Structure and Naming – Next.js
+
+## Overview
+This project demonstrates RESTful API design using
+Next.js App Router and file-based routing.
+
+## API Routes
+
+### Users
+- GET /api/users – Get all users
+- POST /api/users – Create a new user
+- GET /api/users/:id – Get user by ID
+- PUT /api/users/:id – Update user
+- DELETE /api/users/:id – Delete user
+
+## Route Structure
+app/api/users/route.ts  
+app/api/users/[id]/route.ts  
+
+## Naming Convention
+- Lowercase
+- Plural nouns
+- Resource-based routes
+- No verbs in URLs
+
+## Status Codes
+- 200 OK
+- 201 Created
+- 404 Not Found
+- 400 Bad Request
+- 500 Internal Server Error
+
+## Pagination
+Pagination can be implemented using query params
+`page` and `limit`.
+
+## Testing
+All APIs were tested using curl / Postman.
+
+## Reflection
+Consistent API naming improves maintainability,
+reduces bugs, and makes frontend-backend
+integration easier.
+
+
+🔹 What Contexts Do
+
+AuthContext → manages login/logout
+
+UIContext → manages theme & sidebar
+
+🔹 Why Custom Hooks
+
+Cleaner components
+
+Encapsulated logic
+
+Easy scaling
+
+🔹 State Flow
+Component → Hook → Context → State
+
+🔹 Performance Notes
+
+Avoid unnecessary re-renders
+
+Context split prevents overload
+
+useReducer recommended for complex logic

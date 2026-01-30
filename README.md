@@ -477,3 +477,47 @@ JWT expiry (1 hour)
 Token storage (cookie vs localStorage)
 
 Screenshots (Postman success + failure)
+
+
+
+
+
+Cached users:list
+
+Reason: frequently accessed data
+
+🔹 TTL Policy
+
+TTL = 60 seconds
+
+Prevents stale data
+
+🔹 Cache Invalidation
+
+Cache cleared on user update
+
+🔹 Performance Improvement
+
+Cold request: ~120ms
+
+Cached request: ~10ms
+
+🔹 Reflection (Write this)
+
+A unified Redis cache reduced database load and improved API response time. Cache invalidation ensures data freshness while TTL prevents long-lived stale data.
+
+
+
+
+
+
+## Global API Response Handler
+
+### Success Response
+```json
+{
+  "success": true,
+  "message": "Users fetched successfully",
+  "data": [],
+  "timestamp": "2026-01-30T10:00:00.000Z"
+}

@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 
-export const sendSuccess = (
-  data: any,
-  message = "Success",
-  status = 200
-) => {
+export const sendSuccess = (data: any, message = "Success", status = 200) => {
   return NextResponse.json(
     {
       success: true,
@@ -26,10 +22,7 @@ export const sendError = (
     {
       success: false,
       message,
-      error: {
-        code,
-        details,
-      },
+      error: { code, details },
       timestamp: new Date().toISOString(),
     },
     { status }
